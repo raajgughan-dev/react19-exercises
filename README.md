@@ -24,7 +24,7 @@ These exercises focus on fundamental React concepts, with a touch of React 19's 
 
 Example (fetchMessageOfTheDay):
 ```
-  function fetchMessageOfTheDay() {
+function fetchMessageOfTheDay() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve("Welcome to React 19!");
@@ -49,3 +49,59 @@ Example (fetchMessageOfTheDay):
   5. **Conceptual** : Imagine your form submission triggers a "form action" that adds the to-do item. For this client-side exercise, simply add it to the local state. Discuss how a real React 19 app might use a server action here. 
   6. Add a button next to each to-do item to delete it.
 
+# Intermediate Level
+These exercises delve deeper into React 19 features like Server Components, Asset Loading, and more complex state management.
+
+## Exercise 3: Blog Post Viewer with Server Components (Conceptual) and Asset Loading
+**Objective** : Create a blog post viewer. Imagine the main blog post content is a Server Component, and client-side interactions (like comments) are handled by Client Components. Also, explore asset loading.
+
+* **Concepts to practice** :
+  * Component composition (mixing Client and Server Components conceptually)
+  * Conditional rendering 
+  * Props drilling vs. Context API 
+  * **React 19 Features** : Server Components (conceptual), Asset Loading (e.g., preloading images/fonts).
+
+* **Instructions** :
+
+1. **Conceptual Server Component** : Create a BlogPostContent component. Imagine this component is rendered on the server and receives postData as props. It simply displays the title, author, and content. 
+2. **Client Component** : Create a CommentsSection component. This component will handle adding and displaying comments. It should use useState for comments and an input field for new comments. 
+3. Main App Component: In your App component:
+   * Render BlogPostContent (passing mock postData). 
+   * Render CommentsSection. 
+   * **Asset Loading** : Think about how you would use React 19's asset loading capabilities. For instance, if your blog post had a hero image, you could conceptually use preload or preinit directives. Simulate this by adding a ```<link rel="preload" href="image.jpg" as="image">``` in your HTML (or discuss how React 19 would manage this).
+
+## Exercise 4: Data Table with useOptimistic for Instant UI Updates
+**Objective** : Build a data table where updating a row (e.g., marking an item as "completed") provides an instant UI update using useOptimistic, even before the actual server response.
+
+**Concepts to practice** :
+  * Managing arrays of objects in state 
+  * Mapping data to table rows 
+  * Asynchronous operations (simulated API calls)
+  * **React 19 Feature** : useOptimistic hook.
+
+**Instructions** :
+1. Create a DataTable component. 
+2. Initialize some mock data (e.g., an array of objects with id, name, status). 
+3. Render this data in a table. 
+4. Add a button or checkbox next to each row to toggle its status (e.g., "pending" to "completed"). 
+5. When the button is clicked:
+   * Immediately update the UI to reflect the new status using useOptimistic. 
+   * Simulate an asynchronous API call (e.g., setTimeout for 2 seconds) that would confirm the update. 
+   * If the simulated API call fails, revert the optimistic update.
+
+useOptimistic **Hint** :
+```aiignore
+import { useOptimistic } from 'react';
+
+function MyComponent() {
+  const [optimisticValue, setOptimisticValue] = useOptimistic(
+    initialValue,
+    (state, newValue) => newState
+  );
+
+  // ...
+  // Call setOptimisticValue to update the UI optimistically
+  // Then perform the actual async operation
+}
+
+```
